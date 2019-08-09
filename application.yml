@@ -1,0 +1,48 @@
+rpcconfig:
+    dataconfig:
+        uniformconfig:
+            client-reconnect-try: 20
+            #客户端连接超时时间（单位：毫秒
+            client-connect-timeout: 5000
+            #token最大生命期(单位：毫秒)
+            token-life: 1800000
+            client-write-idle: 3000
+            server-read-idle: 8000
+        serviceconfig:
+            #自定义配置的服务数量不确定
+            - name: customer
+              ip: 127.0.0.1
+              port: 8001
+            - name: account
+              ip: 127.0.0.1
+              port: 8002
+            - name: dao
+              ip: 127.0.0.1
+              port: 8003
+            - name: testsso
+              ip: 127.0.0.1
+              port: 8004
+    ssoconfig:
+        - leader-service: customer
+          login-addr: /customer/login
+          visitor-name: httpserver
+          group-members:
+           - account
+           - testssos
+---
+spring:
+    profiles:test
+testdata:
+    animals:
+        - cat
+        - dog
+---
+spring:
+    profiles:cargraph
+cardesign:
+    paper:
+        color: white
+        count: 7
+    pencil:
+        length: 20
+        brand: chenguang
